@@ -1,0 +1,25 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
+Layout/AlignHash:
+  EnforcedColonStyle: key
+  Enabled: true
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Layout/IndentFirstArrayElement:
+  EnforcedStyle: consistent
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: nested
+
+Style/Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
