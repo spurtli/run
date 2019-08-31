@@ -1,7 +1,9 @@
 PATH
   remote: .
   specs:
-    run (0.1.0)
+    run (1.0.0)
+      activesupport (~> 6.0.0)
+      interactor (~> 3.1.1)
       pastel (~> 0.7.2)
       thor (~> 0.20.0)
       tty-box (~> 0.3.0)
@@ -12,6 +14,7 @@ PATH
       tty-editor (~> 0.5.0)
       tty-file (~> 0.7.0)
       tty-font (~> 0.2.0)
+      tty-logger (~> 0.1.0)
       tty-markdown (~> 0.5.0)
       tty-pager (~> 0.12.0)
       tty-pie (~> 0.1.0)
@@ -27,11 +30,22 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (6.0.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 0.7, < 2)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+      zeitwerk (~> 2.1, >= 2.1.8)
     ast (2.4.0)
+    concurrent-ruby (1.1.5)
     diff-lcs (1.3)
     equatable (0.5.0)
+    i18n (1.6.0)
+      concurrent-ruby (~> 1.0)
+    interactor (3.1.1)
     jaro_winkler (1.5.3)
     kramdown (1.16.2)
+    minitest (5.11.3)
     necromancer (0.4.0)
     parallel (1.17.0)
     parser (2.6.4.0)
@@ -73,6 +87,7 @@ GEM
       unicode_utils (~> 1.4)
     strings-ansi (0.1.0)
     thor (0.20.3)
+    thread_safe (0.3.6)
     timers (4.3.0)
     tty-box (0.3.0)
       pastel (~> 0.7.2)
@@ -91,6 +106,8 @@ GEM
       pastel (~> 0.7.2)
       tty-prompt (~> 0.18)
     tty-font (0.2.0)
+    tty-logger (0.1.0)
+      pastel (~> 0.7.0)
     tty-markdown (0.5.1)
       kramdown (~> 1.16.2)
       pastel (~> 0.7.2)
@@ -132,9 +149,12 @@ GEM
       tty-screen (~> 0.6.4)
     tty-tree (0.2.0)
     tty-which (0.4.1)
+    tzinfo (1.2.5)
+      thread_safe (~> 0.1)
     unicode-display_width (1.6.0)
     unicode_utils (1.4.0)
     wisper (2.0.0)
+    zeitwerk (2.1.9)
 
 PLATFORMS
   ruby

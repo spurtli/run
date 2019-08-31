@@ -17,5 +17,27 @@ module Run
       puts "v#{Run::VERSION}"
     end
     map %w[--version -v] => :version
+
+    desc "down", "Teardown your dev environment"
+    method_option :help, aliases: "-h", type: :boolean,
+                         desc: "Display usage information"
+    def down(*)
+      if options[:help]
+        invoke :help, ["down"]
+      else
+        require_relative "commands/down"
+        Run::Commands::Down.new(options).execute
+      end
+    end
+
+    desc("up", "Setup your dev environment")
+    def up(*)
+      if options[:help]
+        invoke :help, ["up"]
+      else
+        require_relative "commands/up"
+        Run::Commands::Up.new(options).execute
+      end
+    end
   end
 end
