@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "pastel", "~> 0.7.2"
-  spec.add_dependency "thor", "~> 0.20.0"
+  spec.add_dependency "thor", ">= 0.20", "< 1.1"
   spec.add_dependency "tty-box", "~> 0.3.0"
   spec.add_dependency "tty-color", "~> 0.4"
   spec.add_dependency "tty-command", ">= 0.8", "< 0.10"
