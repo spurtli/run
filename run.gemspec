@@ -46,7 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "tty-screen", "~> 0.6"
   spec.add_dependency "tty-spinner", "~> 0.9.0"
   spec.add_dependency "tty-table", "~> 0.10.0"
-  spec.add_dependency "tty-tree", ">= 0.2", "< 0.4"
+  spec.add_dependency "tty-tree", ">= 0.2", "< 0.5"
   spec.add_dependency "tty-which", "~> 0.4"
 
   spec.add_development_dependency "bundler", "~> 2.0"
