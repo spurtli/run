@@ -9,15 +9,14 @@ require_relative "../../recipe/step"
 module Run
   module Recipes
     class Prerequisites < Recipe
-      class CheckPrerequisites < Step
-        PREREQUISITES = {
-          brew: false,
-          docker: false,
-          git: true
-        }.freeze
+      class CheckPrerequisites
+        include Interactor
+        include Run::Recipe::Step
+
+        PREREQUISITES = %w[brew docker].freeze
         private_constant(:PREREQUISITES)
 
-        def self.name
+        def self.humanized_name
           "Tools (#{PREREQUISITES.keys.join(', ')})"
         end
 
@@ -29,15 +28,13 @@ module Run
 
         private
 
-        def ensure_prerequisite_or_fail(prerequisite, autoinstall)
+        def ensure_prerequisite_or_fail(prerequisite)
           name = prerequisite.to_s
 
           result = TTY::Which.which(name)
-          context.formulas.prepend(name) if result.nil? && autoinstall
-
           return unless result.nil?
 
-          context.fail!(error: "cannot find \"#{name}\" and cannot install")
+          context.fail!(error: "cannot find \"#{name}\"")
         end
       end
     end

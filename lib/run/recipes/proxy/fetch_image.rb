@@ -9,7 +9,10 @@ require_relative "../../recipe/step"
 module Run
   module Recipes
     class Proxy < Recipe
-      class FetchImage < Step
+      class FetchImage
+        include Interactor
+        include Run::Recipe::Step
+
         NGINX_IMAGE = "nginx:1.17.3-alpine"
         private_constant(:NGINX_IMAGE)
 

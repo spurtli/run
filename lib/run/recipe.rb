@@ -4,9 +4,12 @@ require "interactor"
 require "tty-logger"
 require "tty-spinner"
 
+require_relative "recipe/dependency"
+
 module Run
   class Recipe
     include Interactor::Organizer
+    include Run::Recipe::Dependency
 
     SPINNER_FORMAT = :dots_2
     private_constant(:SPINNER_FORMAT)
@@ -55,7 +58,7 @@ module Run
         width: 60,
         height: 1,
         title: {
-          top_left: name
+          top_left: humanized_name
         },
         border: {
           bottom: false
@@ -76,8 +79,12 @@ module Run
       )
     end
 
-    def name
+    def canonical_name
       self.class.name.split("::").last
+    end
+
+    def humanized_name
+      canonical_name.humanize
     end
 
     def logger

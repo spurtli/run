@@ -11,7 +11,10 @@ require_relative "../../base"
 module Run
   module Recipes
     class Proxy < Recipe
-      class CreateConfig < Step
+      class CreateConfig
+        include Interactor
+        include Run::Recipe::Step
+
         ConfigValues = Struct.new(
           :name,
           :host,

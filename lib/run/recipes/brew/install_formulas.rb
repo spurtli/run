@@ -9,26 +9,21 @@ require_relative "../../recipe/step"
 module Run
   module Recipes
     class Brew < Recipe
-      class InstallFormulas < Step
+      class InstallFormulas
+        include Interactor
+        include Run::Recipe::Step
         include Run::Recipe::Cache
 
         cache(expires: 1.week, attrs: %i[formulas])
 
-        def self.name
-          "Install formulas"
-        end
-
         def call
-          formulas = context.formulas
-
+          formulas = context.config
           formulas.each do |formula|
             result = cmd.run(
               "brew list #{formula} &>/dev/null || brew install #{formula}"
             )
 
-            if result.failure?
-              context.fail!(error: "cannot install formula: #{formula}")
-            end
+            context.fail!(error: "cannot install formula: #{formula}") if result.failure?
           end
         rescue StandardError => e
           context.fail!(error: e.message)

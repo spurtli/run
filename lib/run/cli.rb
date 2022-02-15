@@ -12,32 +12,34 @@ module Run
     Error = Class.new(StandardError)
 
     desc "version", "run version"
+
     def version
       require_relative "version"
       puts "v#{Run::VERSION}"
     end
+
     map %w[--version -v] => :version
 
     desc "down", "Teardown your dev environment"
-    method_option :help, aliases: "-h", type: :boolean,
-                         desc: "Display usage information"
-    def down(*)
-      if options[:help]
-        invoke :help, ["down"]
-      else
-        require_relative "commands/down"
-        Run::Commands::Down.new(options).execute
-      end
+
+    def down(*args)
+      require_relative "commands/down"
+      Run::Commands::Down.new(default_options).call(*args)
     end
 
     desc("up", "Setup your dev environment")
-    def up(*)
-      if options[:help]
-        invoke :help, ["up"]
-      else
-        require_relative "commands/up"
-        Run::Commands::Up.new(options).execute
-      end
+
+    def up(*args)
+      require_relative "commands/up"
+      Run::Commands::Up.new(default_options).call(*args)
+    end
+
+    private
+
+    def default_options
+      {
+        shell: shell
+      }
     end
   end
 end

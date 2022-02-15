@@ -15,6 +15,7 @@ module Run
         class_attribute(:cache_expires)
         class_attribute(:cache_attrs)
 
+        around(:stop_if_cached)
         after(:cache_step)
       end
 
@@ -32,7 +33,7 @@ module Run
                             File.mtime(cache_file)
                           else
                             Time.at(0)
-          end
+                          end
           expired = (Time.now - last_modified) > cache_expires
 
           return false if expired
@@ -56,11 +57,11 @@ module Run
         end
       end
 
-      def run!
-        super unless self.class.cached?(context)
-      end
-
       private
+
+      def stop_if_cached(interactor)
+        interactor.call unless self.class.cached?(context)
+      end
 
       def cache_step
         return unless self.class.cache_enabled?

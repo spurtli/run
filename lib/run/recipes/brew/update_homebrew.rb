@@ -11,14 +11,12 @@ require_relative "../../base"
 module Run
   module Recipes
     class Brew < Recipe
-      class UpdateHomebrew < Step
+      class UpdateHomebrew
+        include Interactor
+        include Run::Recipe::Step
         include Run::Recipe::Cache
 
         cache(expires: 1.week)
-
-        def self.name
-          "Update homebrew"
-        end
 
         def call
           # update brew and formulas

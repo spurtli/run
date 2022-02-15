@@ -9,21 +9,20 @@ require_relative "../../recipe/step"
 module Run
   module Recipes
     class Geoip < Recipe
-      class DownloadFile < Step
+      class DownloadFile
+        include Interactor
+        include Run::Recipe::Step
         include Run::Recipe::Cache
 
         cache(expires: 1.month, attrs: %i[])
 
-        GEOIP_DB_URL = "https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz"
+        GEOIP_DB_URL = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=fV2ookgGTeYmfGSj&suffix=tar.gz"
         private_constant(:GEOIP_DB_URL)
 
         def call
           context.file = File.join(Run::Base::TMP_DIR, "geoip.db.tar.gz")
 
-          TTY::File.download_file(
-            GEOIP_DB_URL,
-            context.file
-          )
+          TTY::File.download_file(GEOIP_DB_URL, context.file)
         rescue StandardError => e
           context.fail!(error: e.message)
         end

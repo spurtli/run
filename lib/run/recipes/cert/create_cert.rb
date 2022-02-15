@@ -10,17 +10,15 @@ require_relative "../../base"
 module Run
   module Recipes
     class Cert < Recipe
-      class CreateCert < Step
+      class CreateCert
+        include Interactor
         include Run::Recipe::Cache
+        include Run::Recipe::Step
 
         cache(expires: 2.weeks)
 
-        def self.name
-          "Create certificates"
-        end
-
         def call
-          host = context.host
+          host = context.config["host"]
           output_path = File.join(Run::Base::DIR, "certs")
 
           FileUtils.mkdir_p(output_path)

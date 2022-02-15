@@ -1,0 +1,9 @@
+up:
+  - geoip
+  - brew:
+      - git
+      - docker
+  - cert:
+      host: api.spurtli.io
+  - dns
+  - proxy

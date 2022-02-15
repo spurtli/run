@@ -11,7 +11,10 @@ require_relative "../../base"
 module Run
   module Recipes
     class Proxy < Recipe
-      class StartProxy < Step
+      class StartProxy
+        include Interactor
+        include Run::Recipe::Step
+
         NGINX_IMAGE = "nginx:1.17.3-alpine"
         private_constant(:NGINX_IMAGE)
 

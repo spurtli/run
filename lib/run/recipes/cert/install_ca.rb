@@ -10,12 +10,14 @@ require_relative "../../base"
 module Run
   module Recipes
     class Cert < Recipe
-      class InstallCA < Step
+      class InstallCA
+        include Interactor
+        include Run::Recipe::Step
         include Run::Recipe::Cache
 
         cache(expires: 1.month)
 
-        def self.name
+        def self.humanized_name
           "Install local CA"
         end
 

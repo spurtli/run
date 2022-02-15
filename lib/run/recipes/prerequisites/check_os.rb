@@ -10,11 +10,14 @@ require_relative "../../recipe/step"
 module Run
   module Recipes
     class Prerequisites < Recipe
-      class CheckOs < Step
+      class CheckOs
+        include Interactor
+        include Run::Recipe::Step
+
         SUPPORTED_OS = ["mac"].freeze
         private_constant(:SUPPORTED_OS)
 
-        def self.name
+        def self.humanized_name
           "Operating System (#{SUPPORTED_OS.join(', ')})"
         end
 

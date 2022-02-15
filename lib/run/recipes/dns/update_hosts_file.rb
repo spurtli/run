@@ -10,7 +10,9 @@ require_relative "../../recipe/step"
 module Run
   module Recipes
     class Dns < Recipe
-      class UpdateHostsFile < Step
+      class UpdateHostsFile
+        include Interactor
+        include Run::Recipe::Step
         include Run::Recipe::Cache
 
         HOSTS_FILE = "/etc/hosts"

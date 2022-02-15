@@ -2,7 +2,7 @@ require:
   - rubocop-performance
   - rubocop-rspec
 
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedColonStyle: key
   Enabled: true
 
@@ -12,7 +12,7 @@ Layout/MultilineMethodCallIndentation:
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 
 Style/ClassAndModuleChildren:

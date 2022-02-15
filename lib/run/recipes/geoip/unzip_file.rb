@@ -10,7 +10,9 @@ require_relative "../../recipe/step"
 module Run
   module Recipes
     class Geoip < Recipe
-      class UnzipFile < Step
+      class UnzipFile
+        include Interactor
+        include Run::Recipe::Step
         include Run::Recipe::Cache
 
         GEOIP_DB_PATH = "*/GeoLite2-City.mmdb"
@@ -43,10 +45,7 @@ module Run
           FileUtils.rm_f(destination)
 
           # move unzipped file to final destination
-          FileUtils.mv(
-            zipped_filepath,
-            destination
-          )
+          FileUtils.mv(zipped_filepath, destination)
 
           context.fail!(error: "cannot unzip geoip database") if result.failure?
 

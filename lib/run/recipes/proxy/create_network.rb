@@ -11,7 +11,10 @@ require_relative "../../base"
 module Run
   module Recipes
     class Proxy < Recipe
-      class CreateNetwork < Step
+      class CreateNetwork
+        include Interactor
+        include Run::Recipe::Step
+
         Network = Struct.new(:type, :subnet, :gateway, :name, keyword_init: true)
         private_constant(:Network)
 
